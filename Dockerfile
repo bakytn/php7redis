@@ -1,14 +1,15 @@
 FROM php:7.0.10-cli
 MAINTAINER Bakyt Niyazov bakytn@gmail.com
 
-RUN apt-get update && apt-get install -y git \
+RUN apt-get update && apt-get install -y curl \
+    curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
+
+RUN apt-get install -y git libmcrypt-dev g++ libicu-dev \
     && docker-php-ext-install mcrypt \
     && docker-php-ext-install mbstring \
-    && docker-php-ext-install curl \
-    && docker-php-ext-install soap \
+#    && docker-php-ext-install soap \
     && docker-php-ext-configure intl \
     && docker-php-ext-install intl
-
 
 # Install Redis extension
 ENV PHPREDIS_VERSION 3.0.0
@@ -19,6 +20,3 @@ RUN mkdir -p /usr/src/php/ext/redis \
     && docker-php-ext-install redis
 #
 
-# Install dependencies
-RUN apt-get install -y curl && \
-    curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
