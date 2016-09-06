@@ -4,9 +4,10 @@ MAINTAINER Bakyt Niyazov bakytn@gmail.com
 RUN apt-get update && apt-get install -y curl \
     curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
 
-RUN apt-get install -y git libmcrypt-dev g++ libicu-dev \
+RUN apt-get install -y git libmcrypt-dev g++ libicu-dev zlib1g-dev \
     && docker-php-ext-install mcrypt \
     && docker-php-ext-install mbstring \
+    && docker-php-ext-install zip \
 #    && docker-php-ext-install soap \
     && docker-php-ext-configure intl \
     && docker-php-ext-install intl
