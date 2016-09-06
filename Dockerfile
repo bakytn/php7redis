@@ -1,12 +1,10 @@
 FROM php:7.0.10-cli
 MAINTAINER Bakyt Niyazov bakytn@gmail.com
 
-RUN apt-get update && apt-get install -y \
-        git \
-    && docker-php-ext-install -j$(nproc) iconv mcrypt \
+RUN apt-get update && apt-get install -y git \
+    && docker-php-ext-install mcrypt \
     && docker-php-ext-install mbstring \
     && docker-php-ext-install curl \
-    && docker-php-ext-install zip \
     && docker-php-ext-install soap \
     && docker-php-ext-configure intl \
     && docker-php-ext-install intl
